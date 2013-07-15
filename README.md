@@ -36,8 +36,3 @@ for ( Prediction p : result )
  * [Apache HttpClient](http://hc.apache.org/)
  * [GSON](http://code.google.com/p/google-gson/)
  * [cg-jcommons](https://github.com/claygregory/cg-jcommons)
-
-##Binary Download
- * [Latest JAR](http://www.claygregory.com/projects/google-places-api-java/releases/0.2-SNAPSHOT/google-places-api-java-0.2-SNAPSHOT.jar)
- * [Latest JAR with dependencies](http://www.claygregory.com/projects/google-places-api-java/releases/0.2-SNAPSHOT/google-places-api-java-0.2-SNAPSHOT-jar-with-dependencies.jar)
- 
