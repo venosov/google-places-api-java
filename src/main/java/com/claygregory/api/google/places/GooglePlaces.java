@@ -72,8 +72,8 @@ public class GooglePlaces {
 				.queryParam( "sensor", String.valueOf( sensor ) );
 			
 			if ( options != null )
-				for ( String param : options.params( ).keySet( ) )
-					builder.queryParam( param, options.param( param ) );
+				for ( String param : options.keySet( ) )
+					builder.queryParam( param, options.get( param ) );
 						
 			HttpGet get = new HttpGet( builder.buildURL( ).toString( ) );
 			return this.parseAutocompleteResponse( this.client.execute( get ) );
