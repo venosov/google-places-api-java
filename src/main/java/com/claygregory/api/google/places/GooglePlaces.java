@@ -11,6 +11,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import com.claygregory.common.data.geo.GeoLocation;
 import com.claygregory.common.net.URLBuilder;
+import com.claygregory.common.util.StringUtil;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,6 +28,8 @@ public class GooglePlaces {
 	private static final String PHOTO_URL = "https://maps.googleapis.com/maps/api/place/photo";
 	
 	private static final String SEARCH_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+
+    private static final String TEXT_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/textsearch/json";
 
 	private String apikey;
 	
@@ -163,4 +166,33 @@ public class GooglePlaces {
 			throw new PlacesException( e );
 		}	
 	}
+
+    public PlacesResult searchText( String query, String types, boolean sensor) {
+
+        try {
+            URLBuilder urlbuilder = URLBuilder.create(TEXT_SEARCH_URL)
+                    .queryParam( "key", this.apikey )
+                    .queryParam("query", query)
+                    .queryParam("sensor", String.valueOf(sensor));
+
+            if (!StringUtil.empty( types ) ) {
+                urlbuilder.queryParam( "types", types);
+            }
+
+             URL url = urlbuilder.buildURL( );
+
+            HttpGet get = new HttpGet( url.toString( ) );
+            return this.parseSearchResponse( this.client.execute( get ) );
+
+        } catch( Exception e ) {
+            throw new PlacesException( e );
+        }
+
+    }
+
+    public PlacesResult searchText( String query, boolean sensor) {
+
+        return searchText(query, "", sensor);
+
+    }
 }
